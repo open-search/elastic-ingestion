@@ -1,0 +1,21 @@
+{
+  "name": "document-ingestion",
+  "version": "1.0.0",
+  "description": "Ingest documents into elasticaserch",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "nyc --show-process-tree tape test"
+  },
+  "author": "Mark Robson",
+  "license": "MIT",
+  "dependencies": {
+    "elasticsearch": "^12.1.0",
+    "readiry": "^1.0.0"
+  },
+  "devDependencies": {
+    "nyc": "^10.0.0",
+    "rewire": "^2.5.2",
+    "tape": "^4.6.3"
+  }
+}

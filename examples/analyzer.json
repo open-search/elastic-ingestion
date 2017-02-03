@@ -1,0 +1,58 @@
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "stopwords": {
+          "type": "stop",
+          "stopwords":  "_english_"
+        },
+        "synonym_filter": {
+          "type": "synonym",
+          "synonyms": [
+            "bobby,frank"
+          ]
+        },
+        "stemmer": {
+          "type": "stemmer",
+          "name": "english"
+        },
+        "snowball": {
+          "type": "snowball",
+          "language": "english"
+        }
+      },
+      "analyzer": {
+        "default": {
+          "filter": [
+            "lowercase",
+            "stopwords",
+            "synonym_filter",
+            "stemmer",
+            "snowball"
+          ],
+          "type": "custom",
+          "tokenizer": "standard"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "_default_": {
+      "properties": {
+        "title": {
+          "type": "text",
+          "fielddata": true
+        },
+        "file": {
+          "type": "text"
+        },
+        "createdTime": {
+          "type": "date"
+        },
+        "modifiedTime": {
+          "type": "date"
+        }
+      }
+    }
+  }
+}

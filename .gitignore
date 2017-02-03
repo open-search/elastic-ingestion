@@ -1,0 +1,16 @@
+*.exe
+*.exe~
+*.orig
+*.test
+.*.swp
+.DS_Store
+.log
+npm-debug.log
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+examples/files
+.nyc_output
+coverage
+node_modules

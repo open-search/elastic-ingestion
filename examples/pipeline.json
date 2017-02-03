@@ -1,0 +1,11 @@
+{
+  "name": "attachment",
+  "body": {
+    "description" : "Attachment ingestion",
+    "processors" : [{
+      "attachment" : {
+        "field" : "data"
+      }
+    }]
+  }
+}
