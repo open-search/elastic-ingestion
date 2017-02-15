@@ -30,7 +30,7 @@ rd.readDeepDirectory(path.normalize('./files'), { DS_Store: null }, processFile)
 function processFile(fileObject) {
   let result = {};
   result.title = formatTitle(fileObject.file);
-  result.download = fileObject.file;
+  result.download = 'downloads/' + fileObject.file;
   result.file = fileObject.file;
   result.createdTime = fileObject.ctime;
   result.modifiedTime = fileObject.mtime;
