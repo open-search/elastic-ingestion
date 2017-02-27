@@ -198,19 +198,27 @@ function generateDocumentArray(index, documentObject) {
  */
 function bulkIngest(client, documentArray) {
 
-  return new Promise((resolve, reject) => {
-    client.bulk({
-      body: documentArray,
-      pipeline: 'attachment',
-    }, (error, response) => {
-      if (error) {
-        return reject(error.message);
-      }
+  let promises = [];
+  let delta = 1000;
 
-      resolve(response);
-    });
-  });
+  for (let i = 0; i < documentArray.length; i = i + delta) {
 
+    promises.push(new Promise((resolve, reject) => {
+      client.bulk({
+        body: documentArray.slice(i,
+          (i + delta > documentArray.length ? documentArray.length : i + delta)),
+        pipeline: 'attachment',
+      }, (error, response) => {
+        if (error) {
+          return reject(error.message);
+        }
+
+        resolve(response);
+      });
+    }));
+  }
+
+  return Promise.all(promises);
 }
 
 /**

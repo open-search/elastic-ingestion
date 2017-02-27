@@ -3,6 +3,18 @@
 let ingestion = require('../../../');
 const test = require('tape').test;
 
+let validClient = {
+  bulk: (ingestobject, callback) => {
+    callback(null, 'success');
+  },
+};
+
+let invalidClient = {
+  bulk: (ingestobject, callback) => {
+    callback({ message: 'some error' });
+  },
+};
+
 test('bulkIngest function', assert => {
 
   assert.plan(1);
@@ -17,19 +29,24 @@ test('bulkIngest function', assert => {
 
 });
 
+test('bulkIngest with empty object array', assert => {
+
+  assert.plan(1);
+
+  let validBulkIngest = ingestion.bulkIngest(validClient, []);
+  validBulkIngest.then(result => {
+    assert.deepEqual(result, [], 'should return empty array');
+  });
+
+});
+
 test('bulkIngest with valid results', assert => {
 
   assert.plan(1);
 
-  let validClient = {
-    bulk: (ingestobject, callback) => {
-      callback(null, 'success');
-    },
-  };
-
-  let validBulkIngest = ingestion.bulkIngest(validClient, []);
+  let validBulkIngest = ingestion.bulkIngest(validClient, ['test']);
   validBulkIngest.then(result => {
-    assert.equal(result, 'success', 'should be successful');
+    assert.deepEqual(result, ['success'], 'should be successful');
   });
 
 });
@@ -38,15 +55,9 @@ test('bulkIngest with client error', assert => {
 
   assert.plan(1);
 
-  let invalidClient = {
-    bulk: (ingestobject, callback) => {
-      callback({ message: 'some error' });
-    },
-  };
-
-  let invalidBulkIngest = ingestion.bulkIngest(invalidClient, []);
+  let invalidBulkIngest = ingestion.bulkIngest(invalidClient, ['test']);
   invalidBulkIngest.catch(error => {
-    assert.equal(error, 'some error', 'should catch error');
+    assert.deepEqual(error, 'some error', 'should catch error');
   });
 
 });
