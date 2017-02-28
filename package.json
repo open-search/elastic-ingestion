@@ -13,7 +13,7 @@
   "author": "Mark Robson",
   "license": "MIT",
   "dependencies": {
-    "elasticsearch": "^12.1.0",
+    "elasticsearch": "^12.1.0"
   },
   "devDependencies": {
     "nyc": "^10.0.0",
