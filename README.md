@@ -1,5 +1,8 @@
 # Elasticsearch document ingestion
 
+[![Build Status](https://travis-ci.org/open-search/elastic-ingestion.svg?branch=master)](https://travis-ci.org/open-search/elastic-ingestion)
+[![Coverage Status](https://coveralls.io/repos/github/open-search/elastic-ingestion/badge.svg?branch=master)](https://coveralls.io/github/open-search/elastic-ingestion?branch=master)
+
 The ingestion library assumes the document ingestion plugin from Elasticasrch has been installed.
 
 This app is composed of two parts - the library and ingestion functions.
