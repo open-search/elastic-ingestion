@@ -8,7 +8,7 @@ The core library located at ```/lib``` contains the api to interact with Elastic
 
 ## Running
 
-The cleanIngest and alias functions take a settings object. It is in this format:
+The ```cleanIngest``` and ```alias``` functions take a settings object. It is in this format:
 
 ```
 settings = {
@@ -32,9 +32,11 @@ settings = {
 }
 ```
 
-Note the documentObject, this is an object with attribute for the index type, and an array of the documents to be ingested with that type.
+Note the documentObject is an array of the documents to be ingested. They will be into ingested into the index with the type specified in the settings object.
 
-Example using cleanIngest. A clean ingest deletes an index with the same name provided, ingests documents, optionally aliases an index.
+##cleanIngest(config)
+
+A clean ingest deletes the index (which you specify in the config), ingests documents, and optionally aliases an index.
 
 ```
 let analyzer = JSON.parse(fs.readFileSync('./analyzer.json', 'utf8'));
@@ -53,14 +55,16 @@ ingest.cleanIngest({
 
 ```
 
-The alias function creates an index, aliases to it, and deletes current index.
+##alias(config)
+
+This creates an index, aliases it, and deletes previous index.
 
 ```
 let analyzer = require('./analyzer.json');
 let pipeline = require('./pipeline.json');
 let documentObject = require('./documentObject.json');
 
-let ingest = require('../');
+let ingest = require('document-ingestion');
 
 ingest.alias({
   index: `myindex-${Date.now()}`,
@@ -74,13 +78,15 @@ ingest.alias({
 
 # API
 
+A short cut api is exposed too:
+
 ## getClient(host)
 
 Returns an elasticsearch client bound to the host provided e.g 'http://localhost:9200'. If the same domain is passed, a cached client is returned.
 
 ## getPipeline(client, pipelineObject)
 
-Pipeline is an object, if pipeline.body exists, it is added to elasticsearch. If no body attribute it will assume that a pipeline with name ```pipeLine.name``` already exists in elasticsearch.
+Pipeline is an object, if ```pipeline.body``` exists, it is added to elasticsearch. If no body attribute it will assume that a pipeline with name ```pipeLine.name``` already exists in elasticsearch.
 
 Example we need for an attachment ingestion:
 
