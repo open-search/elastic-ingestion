@@ -2,6 +2,10 @@
   "name": "document-ingestion",
   "version": "1.0.0",
   "description": "Ingest documents into elasticaserch",
+  "repository": {
+    "type" : "git",
+    "url": "https://github.com/open-search/elastic-ingestion.git"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node index",
