@@ -36,7 +36,7 @@ settings = {
 
 Note the documentObject is an array of the documents to be ingested. They will be into ingested into the index with the type specified in the settings object.
 
-##cleanIngest(config)
+## cleanIngest(config)
 
 A clean ingest deletes the index (which you specify in the config), ingests documents, and optionally aliases an index.
 
@@ -57,7 +57,7 @@ ingest.cleanIngest({
 
 ```
 
-##alias(config)
+## alias(config)
 
 This creates an index, aliases it, and deletes previous index.
 
