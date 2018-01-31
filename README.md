@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/open-search/elastic-ingestion.svg?branch=master)](https://travis-ci.org/open-search/elastic-ingestion)
 
-The ingestion library assumes the document ingestion plugin from Elasticasrch has been installed.
+The ingestion library assumes the document ingestion plugin from Elasticsearch has been installed.
 
 This app is composed of two parts - the library and ingestion functions.
 
