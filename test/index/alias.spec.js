@@ -1,7 +1,5 @@
-'use strict';
-
 const rewire = require('rewire');
-let ingestion = rewire('../../../');
+let ingestion = rewire('../..');
 const test = require('tape').test;
 
 let validConfig = {

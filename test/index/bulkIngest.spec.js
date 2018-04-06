@@ -1,6 +1,6 @@
 'use strict';
 
-let ingestion = require('../../../');
+let ingestion = require('../..');
 const test = require('tape').test;
 
 let validClient = {

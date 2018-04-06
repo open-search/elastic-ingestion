@@ -1,7 +1,6 @@
-'use strict';
-
 const test = require('tape').test;
-const ingest = require('../../../lib');
+const rewire = require('rewire');
+const ingestLib = rewire('../../lib');
 
 const mockClient = {
   indices: {
@@ -20,13 +19,13 @@ const mockInvalidClient = {
 };
 
 test('deleteIndex', assert => {
-  assert.equal(typeof ingest.deleteIndex, 'function', 'should be a function');
+  assert.equal(typeof ingestLib.deleteIndex, 'function', 'should be a function');
   assert.end();
 });
 
 test('deleteIndex with valid values', assert => {
   assert.plan(1);
-  ingest.deleteIndex(mockClient, 'testindex')
+  ingestLib.deleteIndex(mockClient, 'testindex')
     .then(result => {
       assert.equal(result, 'deleted', 'should delete an index');
     });
@@ -34,7 +33,7 @@ test('deleteIndex with valid values', assert => {
 
 test('deleteIndex with invalid values', assert => {
   assert.plan(1);
-  ingest.deleteIndex(mockInvalidClient, 'testindex')
+  ingestLib.deleteIndex(mockInvalidClient, 'testindex')
     .then(result => {
       assert.equal(result, 'error', 'should delete an index');
     });

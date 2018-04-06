@@ -8,7 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "nyc --show-process-tree tape test"
+    "test": "nyc --show-process-tree tape 'test/**/*.spec.js'"
   },
   "author": "Mark Robson",
   "license": "MIT",

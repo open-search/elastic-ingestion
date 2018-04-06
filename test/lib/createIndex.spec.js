@@ -1,7 +1,6 @@
-'use strict';
-
 const test = require('tape').test;
-const ingest = require('../../../lib');
+const rewire = require('rewire');
+const ingestLib = rewire('../../lib');
 
 const mockClient = {
   indices: {
@@ -20,21 +19,21 @@ const mockInvalidClient = {
 };
 
 test('createIndex', assert => {
-  assert.equal(typeof ingest.createIndex, 'function', 'should be a function');
+  assert.equal(typeof ingestLib.createIndex, 'function', 'should be a function');
   assert.end();
 });
 
-test('createIndex with valid values', assert => {
+test('createIndex with valid values', (assert) => {
   assert.plan(1);
-  ingest.createIndex(mockClient, 'testindex', { name: 'analyzer' })
-    .then(result => {
+  ingestLib.createIndex(mockClient, 'testindex', { name: 'analyzer' })
+    .then((result) => {
       assert.equal(result, 'created', 'should create an index');
     });
 });
 
 test('createIndex with invalid values', assert => {
   assert.plan(1);
-  ingest.createIndex(mockInvalidClient, 'testindex', {})
+  ingestLib.createIndex(mockInvalidClient, 'testindex', {})
     .catch(result => {
       assert.equal(result, 'error', 'should reject');
     });

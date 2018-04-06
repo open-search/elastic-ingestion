@@ -1,39 +1,33 @@
-'use strict';
-
 const test = require('tape').test;
-const ingest = require('../../../lib');
+const rewire = require('rewire');
+
+const ingestLib = rewire('../../lib');
 
 const mockClient = {
   ingest: {
-    getPipeline: () => new Promise((resolve, reject) => {
+    getPipeline: () => new Promise((resolve) => {
       resolve('getpiplinecalled');
     }),
-    putPipeline: () => new Promise((resolve, reject) => {
+    putPipeline: () => new Promise((resolve) => {
       resolve('putpipelinecalled');
     }),
   },
 };
 
-test('getPipeline with name and no body', assert => {
-
+test('getPipeline with name and no body', (assert) => {
   assert.plan(1);
-
-  ingest
+  ingestLib
     .getPipeline(mockClient, { name: 'mytest' })
-    .then(result => {
+    .then((result) => {
       assert.equal(result, 'mytest', 'should return name');
     });
-
 });
 
-test('getPipeline with name and body', assert => {
-
+test('getPipeline with name and body', (assert) => {
   assert.plan(1);
-
-  ingest
+  ingestLib
     .getPipeline(mockClient, { name: 'mytest', body: {} })
-    .then(result => {
+    .then((result) => {
       assert.equal(result, 'putpipelinecalled', 'should return putpipeline');
     });
-
 });
