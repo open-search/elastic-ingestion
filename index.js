@@ -201,6 +201,32 @@ function alias(config) {
   });
 }
 
+/**
+ * Ingest into existing index
+ *
+ * @param {object} config object. See above example.
+ * @return {promise}
+ *
+ */
+function indexIngest(config) {
+  validateConfig(config);
+  return new Promise((resolve, reject) => {
+    const client = lib.getClient(config.host);
+    const index = config.index;  
+    lib.getPipeline(client, config.pipeline)
+      .then(() => {
+        generateDocumentArray(index, config.documentObject)
+          .then((result) => {
+            bulkIngest(client, result.reduce((curr, next) => curr.concat(next)))
+              .then(() => {
+                resolve(true);
+              }).catch(reject);
+          });
+      })
+      .catch(reject);
+  });
+}
+
 module.exports = {
   cleanIngest,
   alias,
@@ -208,4 +234,5 @@ module.exports = {
   generateDocumentArray,
   bulkIngest,
   fieldsExistInObject,
+  indexIngest,
 };
