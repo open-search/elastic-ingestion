@@ -1,6 +1,6 @@
 {
   "name": "document-ingestion",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Ingest documents into elasticaserch",
   "repository": {
     "type": "git",
